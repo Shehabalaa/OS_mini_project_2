@@ -20,6 +20,8 @@ struct msgbuff
    short slot; // used to tell number of empty slots in case of returing status or to determine which slot to delete 
    char mtext[64];
 };
+
+
 void kernelHandler(int sig);
 void processHandler(int sig);
 void diskHandler(int sig);
@@ -54,13 +56,12 @@ void process(int num){
     while(1);
 }
 
-
+const short slots_num=10;
+bool reserved[slots_num] ={0};
 void disk(){
     signal(SIGUSR1,diskHandler);
     signal(SIGUSR2,diskHandler);
-    const short slots_num=10;
     char data_slots[slots_num][64];
-    bool reserved[slots_num] ={0};
     status_empty = slots_num;
     msgbuff msg;
     while(1){
@@ -154,6 +155,8 @@ void diskHandler(int sig){
             msgbuff msg;
             msg.slot = status_empty;
             msg.mtype = getpid();
+            for(int i=0;i<10;++i)
+                msg.mtext[i] = (reserved[i])? '1':'0';
             msgsnd(up_id,&msg,sizeof(msg)-sizeof(msg.mtype),!IPC_NOWAIT);
             break;
 
