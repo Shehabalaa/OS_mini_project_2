@@ -32,24 +32,22 @@ void kernel(int *childids)
 {
     signal(SIGINT, kernelHandler);
     signal(SIGUSR2, kernelHandler);
-    
-    for (int i = 0; i < 100000; i++); // waiting for procs 
  
     while (1)
     {
         string responce;
         msgbuff msg1;
         msgbuff msg2;
-        int msgid = msgrcv(up_id, &msg1, sizeof(msg1) - sizeof(msg1.mtype), 0, IPC_NOWAIT);
+        int msgid = msgrcv(up_id, &msg1, sizeof(msg1) - sizeof(msg1.mtype), childids[3], IPC_NOWAIT|MSG_EXCEPT);
         if (msgid == -1)
-            cout << "error in recieve from proc in kernel" << endl;
+            cout << "no mesg recived from any process at clk"<<clk << endl;
         else
         {
-            cout << "successful reciveing from process in kernel " << endl;
             kill(childids[3], SIGUSR1);
-         
             int which_process = 0;
             for (; which_process < 4 && childids[which_process] != msg1.mtype; ++which_process);
+            cout << "successful reciveing in kernel from process "<< which_process<< endl;
+
             if (msg1.operation == 'A')
             {
                 int msgid = msgrcv(up_id, &msg2, sizeof(msg2) - sizeof(msg2.mtype), childids[3], !IPC_NOWAIT);
@@ -64,17 +62,15 @@ void kernel(int *childids)
                     if (msgid1 == -1)
                         cout << "error in sending messege to disk in kernel" << endl;
                     else{
-                    responce = "0";
-                    strcpy(msg1.mtext, responce.c_str());
-                    int msgid2 = msgsnd(down_id, &msg1, sizeof(msg1) - sizeof(msg1.mtype), !IPC_NOWAIT);
-                    if (msgid2 == -1)
-                        cout << "error in sending messege to procces in kernel" << endl;
+                        msg1.mtext[0]='0';
+                        int msgid2 = msgsnd(down_id, &msg1, sizeof(msg1) - sizeof(msg1.mtype), !IPC_NOWAIT);
+                        if (msgid2 == -1)
+                            cout << "error in sending messege to procces in kernel" << endl;
                     }
                 }
                 else
                 {
-                    responce = "2";
-                    strcpy(msg1.mtext, responce.c_str());
+                    msg1.mtext[0]='2';
                     int msgid1 = msgsnd(down_id, &msg1, sizeof(msg1) - sizeof(msg1.mtype), !IPC_NOWAIT);
                 }
             }
@@ -124,9 +120,10 @@ void process(int num)
     in_file.open(filename);
     int time_clk;
     string operation, data;
-    while (in_file >> time_clk)
-    {
+    while (in_file >> time_clk){
         in_file >> operation >> data;
+        cout<<operation<<"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
+        
         while (time_clk > clk);
         msgbuff msg;
         msgbuff msg2;
@@ -141,17 +138,21 @@ void process(int num)
             else
             {
                 cout << "successful sending to kernel from process case Add" << endl;
-                int msgid2 = msgrcv(down_id, &msg2, sizeof(msg2) - sizeof(msg2.mtype), getpid(), !IPC_NOWAIT);
-                if (msgid2 == -1)
-                    cout << "error in recieve messege from kernel in process" << endl;
-                else
-                {
-                    
-                    if (!strcmp(msg2.mtext, "0"))
-                        cout << "successful ADD  "<< getpid()<<endl;
-                    else if (!strcmp(msg2.mtext, "2"))
-                        cout << "unable to ADD  "<< getpid()<<endl;
+
+                int msgid2 = -1;
+                while(msgid2==-1){
+                    cout<<"LOOPING\n";
+                    msgid2 = msgrcv(down_id, &msg2, sizeof(msg2) - sizeof(msg2.mtype), getpid(), !IPC_NOWAIT);
                 }
+                //if (msgid2 == -1)
+                //    cout << "error in recieve messege from kernel in process" << endl;
+               // else
+                //{
+                if (msg2.mtext[0]=='0')
+                    cout << "successful ADD  "<< i <<endl;
+                else if (msg2.mtext[0]=='2')
+                    cout << "unable to ADD  "<< i <<endl;
+                //}
             }
         }
         else if (operation == "DEL")
@@ -172,13 +173,16 @@ void process(int num)
                 else
                 {
                     if (!strcmp(msg2.mtext, "1"))
-                        cout << "successful DEL"<< getpid()<<endl;
+                        cout << "successful DEL"<< i<<endl;
                     else if (!strcmp(msg2.mtext,"3"))
-                        cout << "unable to DEL"<< getpid()<<endl;
+                        cout << "unable to DEL"<< i<<endl;
                 }
             }
         }
     }
+
+        cout<<"CLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOSSSSSSSSSSSSSSSSSSSEEEEEEEEEEEEEE\n";
+    
     in_file.close();
     exit(0);
 }
@@ -191,13 +195,11 @@ void disk()
     
     while (1)
     {
-        
         status_empty = slots_num;
         msgbuff msg;
-        cout<<"entering disk  id --  "<<getpid()<<endl;
         int msgid = msgrcv(down_id, &msg, sizeof(msg) - sizeof(msg.mtype), getpid(), !IPC_NOWAIT);
         if (msgid == -1)
-            cout << "error in reciecing msg from kernel in disk " << endl;
+            continue;
         if (msg.operation == 'A')
         {
             cout << "successful recieving msg from kernel in disk" << endl;
@@ -227,8 +229,7 @@ void disk()
             int starting_time = clk;
             ++status_empty;
             reserved[i] = true;
-            while (clk < starting_time + 1)
-                ;
+            while (clk < starting_time + 1);
             cout << "disk delete at" + to_string(clk) << endl;
         }
     }
@@ -244,10 +245,8 @@ int main()
     {
         pid = fork();
         if (!pid)
-        {
-            cout << "proc id " << getpid() << endl;
             break;
-        }
+
         child_ids[i] = pid;
     }
     if (pid)
