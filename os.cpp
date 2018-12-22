@@ -57,16 +57,16 @@ void kernel(long *childids) {
                 } else {
                     process_msg.mtext[0] = '2';
                     int msgid1 = msgsnd(down_id, &process_msg, sizeof(process_msg) - sizeof(process_msg.mtype), !IPC_NOWAIT);
-                    //cout<<"OOOOOOOOOOBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAA\n";
                 }
             } else if (process_msg.mtext[0] == 'D') {
                 if (disk_msg.mtext[process_msg.slot] == '1') {
+                    strcpy(disk_msg.mtext, process_msg.mtext);
                     disk_msg.slot = process_msg.slot;
                     int msgid1 = msgsnd(down_id, &disk_msg, sizeof(disk_msg) - sizeof(disk_msg.mtype), !IPC_NOWAIT);
                     process_msg.mtext[0]='1';
                     int msgid2 = msgsnd(down_id, &process_msg, sizeof(process_msg) - sizeof(process_msg.mtype), !IPC_NOWAIT);
                 } else {
-                    cout<<"OOOOOOOOOOBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAA\n";
+                    //cout<<"OOOOOOOOOOBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAA\n";
                     process_msg.mtext[0]='3';
                     int msgid1 = msgsnd(down_id, &process_msg, sizeof(process_msg) - sizeof(process_msg.mtype), !IPC_NOWAIT);
                 }
@@ -119,6 +119,7 @@ void process(int num) {
             }
         } else if (request == "DEL") {
             proces_msg.mtext[0] = 'D';
+            proces_msg.mtext[1] = '\0'; 
             proces_msg.slot =stoi(data);
             int msgid = msgsnd(up_id, &proces_msg, sizeof(proces_msg) - sizeof(proces_msg.mtype), !IPC_NOWAIT);
             if (msgid == -1)
@@ -169,13 +170,13 @@ void disk() {
                     --status_empty;
                     for (int i = 0; i < slots_num; i++) {
                         if (!reserved[i]) {
-                            reserved[i] = true;
+                            reserved[i] = 1;
                             strcpy(data_slots[i], buff_msg.mtext+1);
                             break;
                         }
                     } 
                 } else if (buff_msg.mtext[0] == 'D') {
-                    reserved[buff_msg.slot] = false;
+                    reserved[buff_msg.slot] = 0;
                     ++status_empty;
                 }
 
@@ -189,7 +190,7 @@ void disk() {
             }
         } 
         while(time_clk>clk);
-        cout<<"BBBBBBBBBBBBBBBBUUUUUSSSSSSSSSSSSSSSSSSSSYYYYYYY "<<busy<<" CLKKKKKKKKKKK "<<time_clk-1<<endl;
+        //cout<<"BBBBBBBBBBBBBBBBUUUUUSSSSSSSSSSSSSSSSSSSSYYYYYYY "<<busy<<" CLKKKKKKKKKKK "<<time_clk-1<<endl;
 
     }
 }
@@ -222,7 +223,7 @@ void kernelHandler(int sig) {
     signal(sig, kernelHandler);
     switch (sig) {
         case SIGINT:
-            out << "\nUp and Down Deleted and Kernel and all processes are\n";
+            cout << "\nUp and Down Deleted and Kernel and all processes are\n";
             msgctl(up_id, IPC_RMID, (struct msqid_ds *)0);
             msgctl(down_id, IPC_RMID, (struct msqid_ds *)0);
             killpg(getpgrp(), SIGKILL);
