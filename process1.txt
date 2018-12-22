@@ -1,11 +1,13 @@
 1 ADD "process1 clk 1"
 2 ADD "process1 clk 2"
+3 ADD "process1 clk 3"
+4 ADD "process1 clk 4"
+5 ADD "process1 clk 5"
+6 ADD "process1 clk 6"
+7 ADD "process1 clk 7"
+8 ADD "process1 clk 8"
+9 ADD "process1 clk 9"
 10 ADD "process1 clk 10"
-11 ADD "process1 clk 11"
-12 ADD "process1 clk 12"
-13 ADD "process1 clk 13"
-14 ADD "process1 clk 14"
-15 ADD "process1 clk 15"
-16 ADD "process1 clk 16"
-17 ADD "process1 clk 17"
-18 ADD "process1 clk 18"
+40 DEL 7
+41 DEL 7
+42 DEL 7

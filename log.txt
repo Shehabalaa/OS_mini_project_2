@@ -1,0 +1,220 @@
+no mesg recived from any process at clk 0
+--------------------------------------
+Kernel clk 1
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 2
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 3
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 4
+ADD done in disk at clk 4
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 5
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 6
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 7
+ADD done in disk at clk 7
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 8
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 9
+send ADD reqest to kernel from process 0
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 10
+send ADD reqest to kernel from process 0
+ADD done in disk at clk 10
+A request recived in kernel from process 0
+successful ADD for proccess 0
+--------------------------------------
+Kernel clk 11
+no mesg recived from any process at clk 11
+--------------------------------------
+Kernel clk 12
+no mesg recived from any process at clk 12
+--------------------------------------
+Kernel clk 13
+ADD done in disk at clk 13
+no mesg recived from any process at clk 13
+--------------------------------------
+Kernel clk 14
+no mesg recived from any process at clk 14
+--------------------------------------
+Kernel clk 15
+no mesg recived from any process at clk 15
+--------------------------------------
+Kernel clk 16
+ADD done in disk at clk 16
+no mesg recived from any process at clk 16
+--------------------------------------
+Kernel clk 17
+no mesg recived from any process at clk 17
+--------------------------------------
+Kernel clk 18
+no mesg recived from any process at clk 18
+--------------------------------------
+Kernel clk 19
+ADD done in disk at clk 19
+no mesg recived from any process at clk 19
+--------------------------------------
+Kernel clk 20
+no mesg recived from any process at clk 20
+--------------------------------------
+Kernel clk 21
+no mesg recived from any process at clk 21
+--------------------------------------
+Kernel clk 22
+ADD done in disk at clk 22
+no mesg recived from any process at clk 22
+--------------------------------------
+Kernel clk 23
+no mesg recived from any process at clk 23
+--------------------------------------
+Kernel clk 24
+no mesg recived from any process at clk 24
+--------------------------------------
+Kernel clk 25
+ADD done in disk at clk 25
+no mesg recived from any process at clk 25
+--------------------------------------
+Kernel clk 26
+no mesg recived from any process at clk 26
+--------------------------------------
+Kernel clk 27
+no mesg recived from any process at clk 27
+--------------------------------------
+Kernel clk 28
+ADD done in disk at clk 28
+no mesg recived from any process at clk 28
+--------------------------------------
+Kernel clk 29
+no mesg recived from any process at clk 29
+--------------------------------------
+Kernel clk 30
+no mesg recived from any process at clk 30
+--------------------------------------
+Kernel clk 31
+ADD done in disk at clk 31
+no mesg recived from any process at clk 31
+--------------------------------------
+Kernel clk 32
+no mesg recived from any process at clk 32
+--------------------------------------
+Kernel clk 33
+no mesg recived from any process at clk 33
+--------------------------------------
+Kernel clk 34
+no mesg recived from any process at clk 34
+--------------------------------------
+Kernel clk 35
+no mesg recived from any process at clk 35
+--------------------------------------
+Kernel clk 36
+no mesg recived from any process at clk 36
+--------------------------------------
+Kernel clk 37
+no mesg recived from any process at clk 37
+--------------------------------------
+Kernel clk 38
+no mesg recived from any process at clk 38
+--------------------------------------
+Kernel clk 39
+no mesg recived from any process at clk 39
+--------------------------------------
+Kernel clk 40
+send DEL reqest to kernel from process 0
+D request recived in kernel from process 0
+successful DEL for proccess 0
+--------------------------------------
+Kernel clk 41
+send DEL reqest to kernel from process 0
+DEL done in disk at clk 41
+D request recived in kernel from process 0
+successful DEL for proccess 0
+--------------------------------------
+Kernel clk 42
+DEL done in disk at clk 42
+send DEL reqest to kernel from process 0
+D request recived in kernel from process 0
+successful DEL for proccess 0
+--------------------------------------
+Kernel clk 43
+DEL done in disk at clk 43
+no mesg recived from any process at clk 43
+--------------------------------------
+Kernel clk 44
+no mesg recived from any process at clk 44
+--------------------------------------
+Kernel clk 45
+no mesg recived from any process at clk 45
+--------------------------------------
+Kernel clk 46
+no mesg recived from any process at clk 46
+--------------------------------------
+Kernel clk 47
+no mesg recived from any process at clk 47
+--------------------------------------
+Kernel clk 48
+no mesg recived from any process at clk 48
+--------------------------------------
+Kernel clk 49
+no mesg recived from any process at clk 49
+--------------------------------------
+Kernel clk 50
+no mesg recived from any process at clk 50
+--------------------------------------
+Kernel clk 51
+no mesg recived from any process at clk 51
+--------------------------------------
+Kernel clk 52
+no mesg recived from any process at clk 52
+--------------------------------------
+Kernel clk 53
+no mesg recived from any process at clk 53
+--------------------------------------
+Kernel clk 54
+no mesg recived from any process at clk 54
+--------------------------------------
+Kernel clk 55
+no mesg recived from any process at clk 55
+--------------------------------------
+Kernel clk 56
+no mesg recived from any process at clk 56
+--------------------------------------
+Kernel clk 57
+no mesg recived from any process at clk 57
+--------------------------------------
+Kernel clk 58
+no mesg recived from any process at clk 58
+--------------------------------------
+Kernel clk 59
+no mesg recived from any process at clk 59
+--------------------------------------
+Kernel clk 60
+no mesg recived from any process at clk 60
